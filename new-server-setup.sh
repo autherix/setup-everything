@@ -503,7 +503,7 @@ echo
 echo "----------------------------------------"
 
 # Configure bashrc, aliases, path
-echo "[+] Configuring bashrc, aliases, path"
+echo "[INFO] Configuring bashrc, aliases, path"
 # Check if bashrc, aliases, path are in /tmp/installed-packages.txt
 if grep -Fxq "bashrc, aliases, path" /tmp/installed-packages.txt
 then
@@ -525,8 +525,11 @@ fi
 # If configure_bashrc_aliases_path is "y" or "Y", configure bashrc, aliases, path
 if [[ $configure_bashrc_aliases_path =~ ^[Yy]$ ]]
 then
+
     # Configure bashrc, aliases, path
     echo "[+] Configuring bashrc, aliases, path..."
+
+
     # Create the file /ptv/add_to_bashrc.sh if it does not exist
     touch /ptv/add_to_bashrc.sh
     # If /ptv/add_to_bashrc.sh is empty, add the following lines to it: "#!/usr/bin/env bash\n\n"
@@ -571,6 +574,9 @@ then
         echo "source /ptv/add_to_path.sh" >> /ptv/add_to_bashrc.sh
     fi
 
+
+
+
     # Add these lines to /ptv/add_to_aliases.sh, use a for loop and just add each if not already there
     # Define a list of aliases
     aliases=(
@@ -608,33 +614,16 @@ then
     chmod 777 /ptv/add_to_aliases.sh
     chmod 777 /ptv/add_to_path.sh
 
-    ### Add the following lines to /ptv/add_to_bashrc.sh
-    # For terminal setup:
-    # Create git global gitignore file if it does not exist
-    if [ ! -f ~/.gitignore_global ]
+    echo "[+] bashrc, aliases, and path setup complete"
+    # Add "bashrc, aliases, path" to /tmp/installed-packages.txt if it is not already there
+    if ! grep -q "bashrc, aliases, path" /tmp/installed-packages.txt
     then
-        echo "[+] Creating ~/.gitignore_global"
-        touch ~/.gitignore_global
-        # Set 777 permissions on ~/.gitignore_global
-        chmod 777 ~/.gitignore_global
-        # Add the following lines to ~/.gitignore_global
-        echo ".venv/" >> ~/.gitignore_global
-        echo "test/" >> ~/.gitignore_global
-        echo "temp/" >> ~/.gitignore_global
-        echo "tmp/" >> ~/.gitignore_global
-        echo "venv/" >> ~/.gitignore_global
-        echo "log/" >> ~/.gitignore_global
-        echo "logs/" >> ~/.gitignore_global
-        echo "log.txt" >> ~/.gitignore_global
-        echo "logs.txt" >> ~/.gitignore_global
-        echo "log.log" >> ~/.gitignore_global
-        echo "logs.log" >> ~/.gitignore_global
-        echo "*.session" >> ~/.gitignore_global
-        echo "*.session-journal" >> ~/.gitignore_global
-        echo "*.bak" >> ~/.gitignore_global
+        echo "bashrc, aliases, path" >> /tmp/installed-packages.txt
     fi
-    
 fi
-    
+echo
+echo "----------------------------------------"
+
+
 echo "done"
 echo "----------------------------------------"

@@ -3,7 +3,8 @@ set -euo pipefail
 IFS=$'\n\t'
 
 # Make sure the srcipt is not root, if it is, exit with error
-if [[ $EUID -eq 0 ]]; then
+if [[ $EUID -eq 0 ]]
+then
    echo "This script must not be run as root, please run as your common user" 1>&2
    exit 1
 fi
@@ -17,7 +18,8 @@ fi
 
 # Check whether ssh is installed, if not, install it
 if  dpkg --get-selections | grep -q '^ssh[[:space:]]*install$' 
-then echo "[INFO] SSH is already installed!"
+then 
+    echo "[INFO] SSH is already installed!"
 else
     echo  "[INFO] SSH is not installed, Installing it now..."
     apt update
