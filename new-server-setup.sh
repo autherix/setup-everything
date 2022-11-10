@@ -417,6 +417,33 @@ then
     then
         echo "export PATH=\$PATH:/usr/local/go/bin" >> /ptv/add_to_path.sh
     fi
+    # Add export PATH=$PATH:$HOME/go/bin to /ptv/add_to_path.sh if it is not already there
+    if ! grep -q "export PATH=\$PATH:/ptv/go/bin" /ptv/add_to_path.sh
+    then
+        echo "export PATH=\$PATH:/ptv/go/bin" >> /ptv/add_to_path.sh
+    fi
+    # export GOROOT=/usr/local/go
+    if ! grep -q "export GOROOT=/usr/local/go" /ptv/add_to_path.sh
+    then
+        echo "export GOROOT=/usr/local/go" >> /ptv/add_to_path.sh
+    fi
+    # Define GOPATH, GOROOT, GOBIN -> Add export GOPATH=$HOME/go to /ptv/add_to_path.sh
+    if ! grep -q "export GOPATH=/ptv/go" /ptv/add_to_path.sh
+    then
+        echo "export GOPATH=/ptv/go" >> /ptv/add_to_path.sh
+    fi
+    # export GOPATH=$HOME/go
+    if ! grep -q "export GOPATH=/ptv/go" /ptv/add_to_path.sh
+    then
+        echo "export GOPATH=/ptv/go" >> /ptv/add_to_path.sh
+    fi
+    # export GOBIN=$GOPATH/bin
+    if ! grep -q "export GOBIN=/ptv/go/bin" /ptv/add_to_path.sh
+    then
+        echo "export GOBIN=/ptv/go/bin" >> /ptv/add_to_path.sh
+    fi
+    # Remove duplicate lines from /ptv/add_to_path.sh
+    awk '!x[$0]++' /ptv/add_to_path.sh > /tmp/add_to_path.sh && mv /tmp/add_to_path.sh /ptv/add_to_path.sh
     # set permissions for add_to_path.sh
     chmod 777 /ptv/add_to_path.sh
     # Source the file to add go to path
