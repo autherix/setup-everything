@@ -70,6 +70,24 @@ echo "----------------------------------------"
 # Install primary packages (echo each step to the terminal with [+] , [-], [OK] or [FAIL] or [INFO])
 echo "[+] Installing primary packages"
 echo "ssh git net-tools curl wget htop vim tmux nano ufw screen p7zip-full p7zip-rar rar unrar zip unzip bzip2 gzip tar python3 php python3-pip python3-venv jq" | xargs echo | xargs apt install -y > /dev/null 2>&1 && echo "[OK] Primary packages installed" || echo "[FAIL] Primary packages installation failed"
+touch ~/.gitignore_global
+git config --global core.excludesfile ~/.gitignore_global
+echo ".venv" >> ~/.gitignore_global
+echo ".venv/*" >> ~/.gitignore_global
+echo "test/" >> ~/.gitignore_global
+echo "temp/" >> ~/.gitignore_global
+echo "tmp/" >> ~/.gitignore_global
+echo "log" >> ~/.gitignore_global
+echo "log/*" >> ~/.gitignore_global
+echo "logs" >> ~/.gitignore_global
+echo "logs/*" >> ~/.gitignore_global
+echo "log.txt" >> ~/.gitignore_global
+echo "logs.txt" >> ~/.gitignore_global
+echo "log.log" >> ~/.gitignore_global
+echo "logs.log" >> ~/.gitignore_global
+echo "*.session" >> ~/.gitignore_global
+echo "*.session-journal" >> ~/.gitignore_global
+ecjho "*.bak" >> ~/.gitignore_global
 # echo "ssh git net-tools curl wget htop vim tmux nano ufw screen p7zip-full p7zip-rar rar unrar zip unzip bzip2 gzip tar python3 php python3-pip python3-venv jq" | xargs apt install -y > /dev/null 2>&1 && echo "[OK] Primary packages installed" || echo "[-] Primary packages not installed"
 echo 
 echo "----------------------------------------"
@@ -444,8 +462,6 @@ then
     fi
     # Remove duplicate lines from /ptv/add_to_path.sh
     awk '!x[$0]++' /ptv/add_to_path.sh > /tmp/add_to_path.sh && mv /tmp/add_to_path.sh /ptv/add_to_path.sh
-    # set permissions for add_to_path.sh
-    chmod 777 /ptv/add_to_path.sh
     # Source the file to add go to path
     source /ptv/add_to_path.sh
     # Clean up
@@ -634,12 +650,6 @@ then
         # Remove the duplicated lines in /ptv/add_to_aliases.sh
         awk '!a[$0]++' /ptv/add_to_aliases.sh > /tmp/add_to_aliases.sh && mv /tmp/add_to_aliases.sh /ptv/add_to_aliases.sh
     done
-
-
-    # Set 777 permissions on /ptv/add_to_bashrc.sh, /ptv/add_to_aliases.sh, /ptv/add_to_path.sh
-    chmod 777 /ptv/add_to_bashrc.sh
-    chmod 777 /ptv/add_to_aliases.sh
-    chmod 777 /ptv/add_to_path.sh
 
     echo "[+] bashrc, aliases, and path setup complete"
     # Add "bashrc, aliases, path" to /tmp/installed-packages.txt if it is not already there

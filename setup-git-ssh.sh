@@ -2,11 +2,15 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-# Make sure the srcipt is not root, if it is, exit with error
-if [[ $EUID -eq 0 ]]
+# Echo current user and ask the user for confirmation
+echo "Current user: $(whoami)"
+read -p "Are you sure you want to continue? [y/N] " -n 1 -r
+# If the user does not confirm, exit
+if [[ ! $REPLY =~ ^[Yy]$ ]]
 then
-   echo "This script must not be run as root, please run as your common user" 1>&2
-   exit 1
+    # echo [INFO] in yellow, then "Exiting..." in normal color
+    echo -e "\e[33m[INFO]\e[0m Exiting..."
+    exit 1
 fi
 
 # Check whether git is installed, if not, show error and exit
