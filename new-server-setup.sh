@@ -224,8 +224,8 @@ then
     "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
     $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     # Update the apt package index, and install the latest version of Docker Engine, containerd, and Docker Compose, or go to the next step to install a specific version:
-    apt-get update > /dev/null 2>&1
-    apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin > /dev/null 2>&1
+    apt update > /dev/null 2>&1
+    apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin > /dev/null 2>&1
     # wait for docker to start
     echo "[+] Docker is installed, waiting for it to start..."
     sleep 3
@@ -586,6 +586,7 @@ then
     if ! grep -q "source /ptv/add_to_bashrc.sh" ~/.bashrc
     then
         echo "source /ptv/add_to_bashrc.sh" >> ~/.bashrc
+        echo "c" >> ~/.bashrc
     fi
     # Create the file /ptv/add_to_aliases.sh if it does not exist
     touch /ptv/add_to_aliases.sh
