@@ -5,6 +5,7 @@ IFS=$'\n\t'
 # Echo current user and ask the user for confirmation
 echo "Current user: $(whoami)"
 read -p "Are you sure you want to continue? [y/N] " -n 1 -r
+echo
 # If the user does not confirm, exit
 if [[ ! $REPLY =~ ^[Yy]$ ]]
 then

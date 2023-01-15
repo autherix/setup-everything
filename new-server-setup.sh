@@ -120,24 +120,25 @@ then
     # Read current SSH port from /etc/ssh/sshd_config
     current_ssh_port=$(cat /etc/ssh/sshd_config | grep -E '^Port' | grep -Eo '[0-9]+')
     # If current SSH port is empty, find a line starting with #Port
-    if [ -z "$current_ssh_port" ]
+    if [ "$current_ssh_port" == "" ]
     then
         current_ssh_port=$(cat /etc/ssh/sshd_config | grep -E '^#Port' | grep -Eo '[0-9]+')
         if [ -z "$current_ssh_port" ]
         then
-            current_ssh_port="22"
+            # Add the line "Port 22" to /etc/ssh/sshd_config if it is not there
+            echo "Port 22" >> /etc/ssh/sshd_config 
+        else
+            # Remove "#" from the line starting with #Port and set the port to 22 in /etc/ssh/sshd_config
+            sed -i "s/#Port /Port /g" /etc/ssh/sshd_config 
         fi
-    else
-        # set current ssh port to 22
-        current_ssh_port=22
     fi
-    # Ask the user which port they want to use for the ssh 
-    echo -e "[+] What port do you want to use for ssh?\n\tNew port number between 1024 and 65535\n\tEnter 0 to keep the current port: $current_ssh_port]\n\tor 22 to use the default SSH port"
-    read -p "Enter SSH port number: " ssh_port
     echo
     port_set=0 
     # While the port_set is not equal to 1, keep asking the user for a port number
     while [ $port_set -ne 1 ]; do
+        # Ask the user which port they want to use for the ssh 
+        echo -e "[+] What port do you want to use for ssh?\n\tNew port number between 1024 and 65535\n\tEnter 0 to keep the current port: $current_ssh_port]\n\tor 22 to use the default SSH port"
+        read -p "Enter SSH port number: " ssh_port
         # If the user entered 0, keep the current port
         if [ $ssh_port -eq 0 ]
         then
@@ -149,6 +150,7 @@ then
             echo "[+] Setting the port to 22"
             ssh_port=22
             current_ssh_port=$ssh_port
+            echo "Port $ssh_port" | sudo tee -a /etc/ssh/sshd_config
             port_set=1
         # If the user input is not a valid port number, show error and continue loop
         elif ! [[ "$ssh_port" =~ ^[0-9]+$ ]] || [ "$ssh_port" -lt 1025 ] || [ "$ssh_port" -gt 65535 ]
