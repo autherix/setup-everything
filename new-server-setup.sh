@@ -87,7 +87,7 @@ echo "log.log" >> ~/.gitignore_global
 echo "logs.log" >> ~/.gitignore_global
 echo "*.session" >> ~/.gitignore_global
 echo "*.session-journal" >> ~/.gitignore_global
-ecjho "*.bak" >> ~/.gitignore_global
+echo "*.bak" >> ~/.gitignore_global
 # echo "ssh git net-tools curl wget htop vim tmux nano ufw screen p7zip-full p7zip-rar rar unrar zip unzip bzip2 gzip tar python3 php python3-pip python3-venv jq" | xargs apt install -y > /dev/null 2>&1 && echo "[OK] Primary packages installed" || echo "[-] Primary packages not installed"
 echo 
 echo "----------------------------------------"
