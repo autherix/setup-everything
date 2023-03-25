@@ -28,8 +28,7 @@ fi
 echo "Installing resolvconf..."
 apt install resolvconf -y > /dev/null 2>&1
 # Edit the file /etc/resolvconf/resolv.conf.d/base and put lines of nameservers in it
-echo "" > /etc/resolvconf/resolv.conf.d/base
-echo "nameserver 8.8.8.8" >> /etc/resolvconf/resolv.conf.d/base
+echo "nameserver 8.8.8.8" > /etc/resolvconf/resolv.conf.d/base
 echo "nameserver 8.8.4.4" >> /etc/resolvconf/resolv.conf.d/base
 echo "nameserver 1.1.1.1" >> /etc/resolvconf/resolv.conf.d/base
 echo "nameserver 84.200.69.80" >> /etc/resolvconf/resolv.conf.d/base
@@ -37,9 +36,7 @@ echo "nameserver 84.200.70.40" >> /etc/resolvconf/resolv.conf.d/base
 echo "nameserver 208.67.222.222" >> /etc/resolvconf/resolv.conf.d/base
 echo "nameserver 208.67.220.220" >> /etc/resolvconf/resolv.conf.d/base
 # Edit the file /etc/resolvconf/resolv.conf.d/head and put lines of nameservers in it
-echo "" > /etc/resolvconf/resolv.conf.d/head
-echo "" > /etc/resolvconf/resolv.conf.d/head
-echo "nameserver 8.8.8.8" >> /etc/resolvconf/resolv.conf.d/head
+echo "nameserver 8.8.8.8" > /etc/resolvconf/resolv.conf.d/head
 echo "nameserver 8.8.4.4" >> /etc/resolvconf/resolv.conf.d/head
 echo "nameserver 1.1.1.1" >> /etc/resolvconf/resolv.conf.d/head
 echo "nameserver 84.200.69.80" >> /etc/resolvconf/resolv.conf.d/head
@@ -511,28 +508,167 @@ then
     echo "[+] Installing tools from github or go tools..."
     # Install yq
     echo "[+] Installing yq..."
-    go install github.com/mikefarah/yq/v4@latest > /dev/null 2>&1
+    go install github.com/mikefarah/yq/v4@latest
     echo "[INFO] Installed yq"
     echo "-----"
     # Install amass
     echo "[+] Installing amass..."
-    go install -v github.com/OWASP/Amass/v3/...@master > /dev/null 2>&1
+    go install -v github.com/OWASP/Amass/v3/...@master
     echo "[INFO] Installed amass"
     echo "-----"
     # Install nuclei
     echo "[+] Installing nuclei..."
-    go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest > /dev/null 2>&1
+    go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest
     echo "[INFO] Installed nuclei"
     echo "-----"
     # Install subfinder
     echo "[+] Installing subfinder..."
-    go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest > /dev/null 2>&1
+    go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
     echo "[INFO] Installed subfinder"
     echo "-----"
     # Install httpx
     echo "[+] Installing httpx..."
-    go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest > /dev/null 2>&1
+    go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
     echo "[INFO] Installed httpx"
+    echo "-----"
+    # Install assetfinder
+    echo "[+] Installing assetfinder..."
+    go install -v github.com/tomnomnom/assetfinder@latest
+    echo "[INFO] Installed assetfinder"
+    echo "-----"
+    # Install waybackurls
+    echo "[+] Installing waybackurls..."
+    go install -v github.com/tomnomnom/waybackurls@latest
+    echo "[INFO] Installed waybackurls"
+    echo "-----"
+    # Install gau
+    echo "[+] Installing gau..."
+    go install -v github.com/lc/gau@latest
+    echo "[INFO] Installed gau"
+    echo "-----"
+    # Install gf
+    echo "[+] Installing gf..."
+    go install -v github.com/tomnomnom/gf@latest
+    echo "[INFO] Installed gf"
+    echo "-----"
+    # Install gf patterns
+    echo "[+] Installing gf patterns..."
+    mkdir -p ~/.gf
+    cp -r $GOPATH/pkg/mod/github.com/tomnomnom/gf@v*/examples ~/.gf
+    echo "[INFO] Installed gf patterns"
+    echo "-----"
+    # Install ffuf
+    echo "[+] Installing ffuf..."
+    go install -v github.com/ffuf/ffuf@latest
+    echo "[INFO] Installed ffuf"
+    echo "-----"
+    # Install hakrawler
+    echo "[+] Installing hakrawler..."
+    go install -v github.com/hakluke/hakrawler@latest
+    echo "[INFO] Installed hakrawler"
+    echo "-----"
+    # Install hakrevdns
+    echo "[+] Installing hakrevdns..."
+    go install -v github.com/hakluke/hakrevdns@latest
+    echo "[INFO] Installed hakrevdns"
+    echo "-----"
+    # Install hakcheckurl
+    echo "[+] Installing hakcheckurl..."
+    go install -v github.com/hakluke/hakcheckurl@latest
+    echo "[INFO] Installed hakcheckurl"
+    echo "-----"
+    # Install haktrails
+    echo "[+] Installing haktrails..."
+    go install -v github.com/hakluke/haktrails@latest
+    echo "[INFO] Installed haktrails"
+    echo "-----"
+    # Install subjack
+    echo "[+] Installing subjack..."
+    go install -v github.com/haccer/subjack@latest
+    echo "[INFO] Installed subjack"
+    echo "-----"
+    # Install subzy
+    echo "[+] Installing subzy..."
+    go install -v github.com/LukaSikic/subzy@latest
+    echo "[INFO] Installed subzy"
+    echo "-----"
+    # Install subjs
+    echo "[+] Installing subjs..."
+    go install -v github.com/lc/subjs@latest
+    echo "[INFO] Installed subjs"
+    echo "-----"
+    # Install qsreplace
+    echo "[+] Installing qsreplace..."
+    go install -v github.com/tomnomnom/qsreplace@latest
+    echo "[INFO] Installed qsreplace"
+    echo "-----"
+    # Install unfurl
+    echo "[+] Installing unfurl..."
+    go install -v github.com/tomnomnom/unfurl@latest
+    echo "[INFO] Installed unfurl"
+    echo "-----"
+    # Install dalfox
+    echo "[+] Installing dalfox..."
+    go install -v github.com/hahwul/dalfox/v2@latest
+    echo "[INFO] Installed dalfox"
+    echo "-----"
+    # Install gospider
+    echo "[+] Installing gospider..."
+    go install -v github.com/jaeles-project/gospider@latest
+    echo "[INFO] Installed gospider"
+    echo "-----"
+    # Install gowitness
+    echo "[+] Installing gowitness..."
+    go install -v github.com/sensepost/gowitness@latest
+    echo "[INFO] Installed gowitness"
+    echo "-----"
+    # Install gron
+    echo "[+] Installing gron..."
+    go install -v github.com/tomnomnom/gron@latest
+    echo "[INFO] Installed gron"
+    echo "-----"
+    # Install kxss
+    echo "[+] Installing kxss..."
+    go install -v github.com/tomnomnom/hacks/kxss@latest
+    echo "[INFO] Installed kxss"
+    echo "-----"
+    # Install meg
+    echo "[+] Installing meg..."
+    go install -v github.com/tomnomnom/meg@latest
+    echo "[INFO] Installed meg"
+    echo "-----"
+    # Install hakscale
+    echo "[+] Installing hakscale..."
+    go install -v github.com/hakluke/hakscale@latest
+    echo "[INFO] Installed hakscale"
+    echo "-----"
+    # Install dnsx
+    echo "[+] Installing dnsx..."
+    go install -v github.com/projectdiscovery/dnsx/cmd/dnsx@latest
+    echo "[INFO] Installed dnsx"
+    echo "-----"
+    # Install shuffledns
+    echo "[+] Installing shuffledns..."
+    go install -v github.com/projectdiscovery/shuffledns/cmd/shuffledns@latest
+    echo "[INFO] Installed shuffledns"
+    echo "-----"
+    # Install jaeles
+    echo "[+] Installing jaeles..."
+    go install -v github.com/jaeles-project/gospider@latest
+    echo "[INFO] Installed jaeles"
+    echo "-----"
+    # Install puredns
+    echo "[+] Installing puredns..."
+    go install -v github.com/d3mondev/puredns/v2@latest
+    echo "[INFO] Installed puredns"
+    echo "-----"
+    # Install massdns
+    echo "[+] Installing massdns..."
+    git clone https://github.com/blechschmidt/massdns.git /opt/massdns > /dev/null 2>&1
+    cd /opt/massdns
+    make
+    mv bin/massdns /usr/local/bin/
+    echo "[INFO] Installed massdns"
     echo "-----"
 
     # Add tools to /tmp/installed-packages.txt if it is not already there
@@ -653,6 +789,47 @@ then
         # Remove the duplicated lines in /ptv/add_to_aliases.sh
         awk '!a[$0]++' /ptv/add_to_aliases.sh > /tmp/add_to_aliases.sh && mv /tmp/add_to_aliases.sh /ptv/add_to_aliases.sh
     done
+
+    # Create the file /ptv/rtsetup.sh if it does not exist
+    touch /ptv/rtsetup.sh
+    # If /ptv/rtsetup.sh is empty, add this to it "#!/usr/bin/env bash\n\n"
+    if [ ! -s /ptv/rtsetup.sh ]
+    then
+        echo "#!/usr/bin/env bash" > /ptv/rtsetup.sh
+        echo "" >> /ptv/rtsetup.sh
+        echo "[+] Created /ptv/rtsetup.sh and initialized it"
+    fi
+    # Add /ptv/rtsetup.sh to /ptv/add_to_bashrc.sh if it is not already there
+    if ! grep -q "source /ptv/rtsetup.sh" /ptv/add_to_bashrc.sh
+    then
+        echo "source /ptv/rtsetup.sh" >> /ptv/add_to_bashrc.sh
+    fi
+    # Add these lines one by one to the file /ptv/rtsetup.sh if they are not already there: `rt=/ptv`
+    if ! grep -q "rt=/ptv" /ptv/rtsetup.sh
+    then
+        echo "rt=/ptv" >> /ptv/rtsetup.sh
+    fi
+    
+    # Add these lines one by one to the file /ptv/rtsetup.sh if they are not already there: `alias rt='cd $rt'`
+    if ! grep -q "alias rt='cd /ptv'" /ptv/rtsetup.sh
+    then
+        echo "alias rt='cd /ptv'" >> /ptv/rtsetup.sh
+    fi
+
+    # Add these lines one by one to the file /ptv/rtsetup.sh if they are not already there: `alias rtsetup='source $rt/rtsetup.sh'`
+    if ! grep -q "alias rtsetup='source \$rt/rtsetup.sh'" /ptv/rtsetup.sh
+    then
+        echo "alias rtsetup='source \$rt/rtsetup.sh'" >> /ptv/rtsetup.sh
+    fi
+
+    # Add these lines one by one to the file /ptv/rtsetup.sh if they are not already there: `function seterror() { errmsg=$1; echo -e "\e[31m[ERR] $errmsg\e[0m"; exit 1; }`, don't forget to escape the characters to prevent bash from interpreting them in both grep and echo commands
+    # remove any line that contains "function seterror()" in the beginning of the line
+    sed -i '/^function seterror()/d' /ptv/rtsetup.sh
+    # add the line to the file
+    if ! grep -q "function seterror() { errmsg=\$1; echo -e \"\\e[31m[ERR] \$errmsg\\e[0m\"; exit 1; }" /ptv/rtsetup.sh
+    then
+        echo "function seterror() { errmsg=\$1; echo -e \"\\e[31m[ERR] \$errmsg\\e[0m\"; exit 1; }" >> /ptv/rtsetup.sh
+    fi
 
     echo "[+] bashrc, aliases, and path setup complete"
     # Add "bashrc, aliases, path" to /tmp/installed-packages.txt if it is not already there
