@@ -741,7 +741,7 @@ then
     if ! grep -q "source /ptv/add_to_bashrc.sh" ~/.bashrc
     then
         echo "source /ptv/add_to_bashrc.sh" >> ~/.bashrc
-        echo "c" >> ~/.bashrc
+        # echo "c" >> ~/.bashrc
     fi
     # Create the file /ptv/add_to_aliases.sh if it does not exist
     touch /ptv/add_to_aliases.sh
