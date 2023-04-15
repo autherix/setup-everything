@@ -66,25 +66,42 @@ echo "----------------------------------------"
 
 # Install primary packages (echo each step to the terminal with [+] , [-], [OK] or [FAIL] or [INFO])
 echo "[+] Installing primary packages"
-echo "ssh git net-tools curl wget htop vim tmux nano ufw screen p7zip-full p7zip-rar rar unrar zip unzip bzip2 gzip tar python3 php python3-pip python3-venv jq" | xargs echo | xargs apt install -y > /dev/null 2>&1 && echo "[OK] Primary packages installed" || echo "[FAIL] Primary packages installation failed"
+echo "ssh git net-tools curl wget htop vim tmux nano ufw screen p7zip-full p7zip-rar rar unrar zip unzip bzip2 gzip tar python3 php python3-pip python3-venv jq chromium-browser chromium-driver build-essential pkg-config libssl-dev" | xargs echo | xargs apt install -y > /dev/null 2>&1 && echo "[OK] Primary packages installed" || echo "[FAIL] Primary packages 
+installation failed"
+# An array to store the list of what we should add to ~/.gitignore_global
+gitignore_global_array=( 
+    ".venv"
+    ".venv/*"
+    "test/"
+    "temp/"
+    "tmp/"
+    "log"
+    "log/*"git add .
+    "logs"
+    "logs/*"
+    "log.txt"
+    "logs.txt"
+    "log.log"
+    "logs.log"
+    "*.session"
+    "*.session-journal"
+    "*.bak"
+    "cred*.yml"
+    "cred*.yaml"
+    "cred*.json"
+    "cred*.sh"
+    "resume.cfg"
+    "__pycache__"
+    "venv/"
+    ".venv/"
+)
+
 touch ~/.gitignore_global
 git config --global core.excludesfile ~/.gitignore_global
-echo ".venv" >> ~/.gitignore_global
-echo ".venv/*" >> ~/.gitignore_global
-echo "test/" >> ~/.gitignore_global
-echo "temp/" >> ~/.gitignore_global
-echo "tmp/" >> ~/.gitignore_global
-echo "log" >> ~/.gitignore_global
-echo "log/*" >> ~/.gitignore_global
-echo "logs" >> ~/.gitignore_global
-echo "logs/*" >> ~/.gitignore_global
-echo "log.txt" >> ~/.gitignore_global
-echo "logs.txt" >> ~/.gitignore_global
-echo "log.log" >> ~/.gitignore_global
-echo "logs.log" >> ~/.gitignore_global
-echo "*.session" >> ~/.gitignore_global
-echo "*.session-journal" >> ~/.gitignore_global
-echo "*.bak" >> ~/.gitignore_global
+
+# Remove duplicate lines from ~/.gitignore_global
+cat ~/.gitignore_global | sort -u > /tmp/.gitignore_global && mv /tmp/.gitignore_global ~/.gitignore_global
+
 # echo "ssh git net-tools curl wget htop vim tmux nano ufw screen p7zip-full p7zip-rar rar unrar zip unzip bzip2 gzip tar python3 php python3-pip python3-venv jq" | xargs apt install -y > /dev/null 2>&1 && echo "[OK] Primary packages installed" || echo "[-] Primary packages not installed"
 echo 
 echo "----------------------------------------"
@@ -763,7 +780,6 @@ then
     # Define a list of aliases
     aliases=(
         "alias ll='ls -l'"
-        "alias ll='ls -l'"
         "alias la='ls -A'"
         "alias l='ls -CF'"
         "alias grep='grep --color=auto'"
@@ -777,12 +793,19 @@ then
         "alias clearl='printf \"\\033c\" && ls'"
         "alias pysource='source ./.venv/bin/activate'"
         "alias pyfreeze='python3 -m pip freeze'"
+        "alias pyvenv='python3 -m venv .venv'"
+        "alias pyinstall='python3 -m pip install'"
+        "alias pyupgrade='python3 -m pip install --upgrade'"
+        "alias pyuninstall='python3 -m pip uninstall'"
+        "alias docka=\"docker ps -a --format json | jq '.Names,.ID, .Image, .Status, \\\"----------------\\\"'\""
     )
     # Loop through the aliases
     for alias in "${aliases[@]}"
     do
         # If the alias is not already in /ptv/add_to_aliases.sh, add it
-        if ! grep -q "$(echo $alias)" /ptv/add_to_aliases.sh
+        # Select the first field before `=` and check if it is in /ptv/add_to_aliases.sh
+        checking_alias=$(echo $alias | cut -d "=" -f 1)
+        if ! grep -q "$checking_alias" /ptv/add_to_aliases.sh
         then
             echo "$alias" >> /ptv/add_to_aliases.sh
         fi
