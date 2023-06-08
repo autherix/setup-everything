@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+# Get current file path
+current_file_path=$(realpath $0)
+# Get current directory path
+current_directory_path=$(dirname "$current_file_path")
+
 # Check if the script is being run as root
 if [ "$EUID" -ne 0 ]
   then echo "Please run the script as root"
@@ -68,35 +73,10 @@ echo "----------------------------------------"
 echo "[+] Installing primary packages"
 echo "ssh git net-tools curl wget htop vim tmux nano ufw screen p7zip-full p7zip-rar rar unrar zip unzip bzip2 gzip tar python3 php python3-pip python3-venv jq chromium-browser chromium-driver build-essential pkg-config libssl-dev" | xargs echo | xargs apt install -y > /dev/null 2>&1 && echo "[OK] Primary packages installed" || echo "[FAIL] Primary packages 
 installation failed"
-# An array to store the list of what we should add to ~/.gitignore_global
-gitignore_global_array=( 
-    ".venv"
-    ".venv/*"
-    "test/"
-    "temp/"
-    "tmp/"
-    "log"
-    "log/*"git add .
-    "logs"
-    "logs/*"
-    "log.txt"
-    "logs.txt"
-    "log.log"
-    "logs.log"
-    "*.session"
-    "*.session-journal"
-    "*.bak"
-    "cred*.yml"
-    "cred*.yaml"
-    "cred*.json"
-    "cred*.sh"
-    "resume.cfg"
-    "__pycache__"
-    "venv/"
-    ".venv/"
-)
 
-touch ~/.gitignore_global
+# Copy current_directory_path/.gitignore_global to ~/.gitignore_global
+cp $current_directory_path/.gitignore_global ~/.gitignore_global
+
 git config --global core.excludesfile ~/.gitignore_global
 
 # Remove duplicate lines from ~/.gitignore_global
@@ -389,7 +369,7 @@ then
     # Go to directory ~/.openvpn
     cd ~/.openvpn
     # Get this script from github using curl
-    curl -O https://raw.githubusercontent.com/Autherix/openvpn-install/master/openvpn-install.sh
+    curl -O https://raw.githubusercontent.com/angristan/openvpn-install/master/openvpn-install.sh
     chmod +x openvpn-install.sh
     # Run the script and wait for it to finish
     ./openvpn-install.sh --auto
