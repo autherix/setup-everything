@@ -3,7 +3,7 @@
 GIT_USERNAME="StoicTopG"
 
 # Define a list of strings to search for my repository names
-declare -a rootarr=("setup-everything" "notifio" "server-management" "code-templates" "pybot" "safe-panel" "components-setup" "materials")
+declare -a rootarr=("setup-everything" "notifio" "server-management" "code-templates" "safe-panel" "components-setup" "materials" "minicodes")
 declare -a healerarr=("healerdb" "healerdb-py" "healerenum" "healerex" "bbplats" "healerweb")
 
 # Loop through the rootarr and git clone the repositories
