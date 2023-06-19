@@ -75,7 +75,7 @@ echo "ssh git net-tools curl wget htop vim tmux nano ufw screen p7zip-full p7zip
 installation failed"
 
 # Copy current_directory_path/.gitignore_global to ~/.gitignore_global
-cp $current_directory_path/.gitignore_global ~/.gitignore_global
+cp $current_directory_path/../.gitignore_global ~/.gitignore_global
 
 git config --global core.excludesfile ~/.gitignore_global
 
