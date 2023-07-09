@@ -19,6 +19,7 @@ then
 fi
 
 # Check the file /etc/resolv.conf, if there is not a line "nameserver 8.8.8.8", add it to the file and save it
+# apt --purge remove resolvconf -y > /dev/null 2>&1
 echo "[+] Checking /etc/resolv.conf"
 if ! grep -q "nameserver 8.8.8.8" /etc/resolv.conf
 then
@@ -510,7 +511,7 @@ then
     echo "-----"
     # Install amass
     echo "[+] Installing amass..."
-    go install -v github.com/OWASP/Amass/v3/...@master
+    go install -v github.com/owasp-amass/amass/v3/...@master
     echo "[INFO] Installed amass"
     echo "-----"
     # Install nuclei
