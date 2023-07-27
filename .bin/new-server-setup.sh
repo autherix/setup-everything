@@ -75,6 +75,11 @@ echo "[+] Installing primary packages"
 echo "ssh git net-tools curl wget htop vim tmux nano ufw screen p7zip-full p7zip-rar rar unrar zip unzip bzip2 gzip tar python3 php python3-pip python3-venv jq chromium-browser chromium-driver build-essential pkg-config libssl-dev" | xargs echo | xargs apt install -y > /dev/null 2>&1 && echo "[OK] Primary packages installed" || echo "[FAIL] Primary packages 
 installation failed"
 
+# Install global python packages
+python3 -m pip install --upgrade pip > /dev/null 2>&1
+python3 -m pip install -U setuptools > /dev/null 2>&1
+python3 -m pip install -U uro wafw00f > /dev/null 2>&1
+
 # Copy current_directory_path/.gitignore_global to ~/.gitignore_global
 cp $current_directory_path/../.gitignore_global ~/.gitignore_global
 
