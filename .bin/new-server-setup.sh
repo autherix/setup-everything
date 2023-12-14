@@ -72,7 +72,7 @@ echo "----------------------------------------"
 
 # Install primary packages (echo each step to the terminal with [+] , [-], [OK] or [FAIL] or [INFO])
 echo "[+] Installing primary packages"
-echo "ssh git net-tools curl wget htop vim tmux nano ufw screen p7zip-full p7zip-rar rar unrar zip unzip bzip2 gzip tar python3 php python3-pip python3-venv jq chromium-browser chromium-driver build-essential pkg-config libssl-dev" | xargs echo | xargs apt install -y > /dev/null 2>&1 && echo "[OK] Primary packages installed" || echo "[FAIL] Primary packages 
+echo "ssh git net-tools curl wget htop vim tmux nano ufw screen p7zip-full p7zip-rar rar unrar zip unzip bzip2 gzip tar python3 php python3-pip python3-venv jq chromium-browser chromium-driver build-essential pkg-config libssl-dev cloc" | xargs echo | xargs apt install -y > /dev/null 2>&1 && echo "[OK] Primary packages installed" || echo "[FAIL] Primary packages 
 installation failed"
 
 # Install global python packages
